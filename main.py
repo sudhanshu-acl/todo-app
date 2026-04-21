@@ -1,33 +1,11 @@
 from fastapi import FastAPI
 from app.core.database import Base, engine
 from app.modules.todos.api.v1.router import router as todo_router
+from app.core.docs import description, tags_metadata, contact_info, license_info, servers
 import os
 import platform
 
 Base.metadata.create_all(bind=engine)
-
-description = """
-Todo API helps you do awesome stuff. 🚀
-
-## Todos
-
-You can **create, read, update, and delete** items.
-"""
-
-tags_metadata = [
-    {
-        "name": "todos",
-        "description": "Manage tasks and to-dos.",
-    },
-    {
-        "name": "root",
-        "description": "Root endpoint.",
-    },
-    {
-        "name": "health",
-        "description": "Health check for the service.",
-    },
-]
 
 app = FastAPI(
     title="Todo API",
@@ -35,20 +13,10 @@ app = FastAPI(
     summary="A sample Todo API showing advanced FastAPI features.",
     version="1.0.0",
     terms_of_service="http://example.com/terms/",
-    contact={
-        "name": "API Support",
-        "url": "http://www.example.com/support",
-        "email": "support@example.com",
-    },
-    license_info={
-        "name": "Apache 2.0",
-        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
-    },
+    contact=contact_info,
+    license_info=license_info,
     openapi_tags=tags_metadata,
-    servers=[
-        {"url": "http://localhost:8000", "description": "Local Development"},
-        {"url": "https://api.example.com", "description": "Production Environment"},
-    ],
+    servers=servers,
 )
 
 @app.get("/", tags=["root"])
