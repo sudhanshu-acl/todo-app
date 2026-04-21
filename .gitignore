@@ -1,0 +1,20 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+build/
+dist/
+
+## build artifacts
+*.egg-info/
+.eggs/
+
+## Virtual environment
+.venv/
+.env
+app.db
+alembic/
+migrations/
+
