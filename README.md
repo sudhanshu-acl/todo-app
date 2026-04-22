@@ -43,3 +43,36 @@ To maintain a healthy codebase as the project scales, we follow these management
 
 4. **Scalability Path**
    By strictly maintaining this module division, the project is structured as a "Modular Monolith". If the application load or team size grows significantly, individual modules can be easily refactored and extracted into separate microservices.
+
+---
+
+## Contribution & Branching Strategy
+
+We follow a structured workflow to maintain code quality and stability.
+
+### Branching Model
+
+This project uses a standard branching flow:
+- `main`: Represents the production-ready state. Only stable, tested features are merged here.
+- `develop`: The primary integration branch. All feature branches are merged into `develop` for testing before a release.
+- **Feature Branches**: Branch off from `develop` and name the branch descriptively (e.g., `feature/add-user-login`, `bugfix/auth-header`).
+
+### Development Workflow
+
+1. **Create an Issue**: Before starting work, ensure there is an issue tracking the feature or bug.
+2. **Branch Out**: Create a branch off `develop`:
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git checkout -b feature/your-feature-name
+   ```
+3. **Commit Messages**: Write clear, descriptive commit messages. We recommend using the [Conventional Commits](https://www.conventionalcommits.org/) format (e.g., `feat: API documentation updates`, `fix: database connection string`).
+4. **Pull Request**: Push your branch and open a Pull Request against the `develop` branch.
+5. **Code Review**: Ensure at least one teammate reviews your PR. Address any feedback before merging.
+6. **Merge**: Once approved and all tests pass, merge your code.
+
+### Pull Request Guidelines
+
+- Keep PRs focused. Do not mix unrelated changes in a single Pull Request.
+- Ensure all automated checks (linting, tests) pass.
+- Link the related issue in the PR description (e.g., `Closes #123`).
