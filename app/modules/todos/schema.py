@@ -17,7 +17,7 @@ class TodoResponse(BaseModel):
     title: str
     description: str
     completed: bool
+    owner_id: int | None = None
 
     class Config:
         from_attributes = True
-

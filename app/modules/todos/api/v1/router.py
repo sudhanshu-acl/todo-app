@@ -14,11 +14,14 @@ from app.modules.todos.service import (
 from app.modules.todos.deps import get_db
 
 
+from app.modules.auth.deps import get_current_active_user
+from app.modules.users.model import User
+
 router = APIRouter(prefix="/todos", tags=["Todo Module"])
 
 @router.post("/", response_model=TodoResponse, status_code=201)
-def create_todo_endpoint(todo: TodoCreate, db: Session = Depends(get_db)):
-    todo_item = create_todo(db, todo)
+def create_todo_endpoint(todo: TodoCreate, current_user: User = Depends(get_current_active_user), db: Session = Depends(get_db)):
+    todo_item = create_todo(db, todo, owner_id=current_user.id)
     return todo_item
 
 @router.get("/", response_model=list[TodoResponse])

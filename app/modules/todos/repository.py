@@ -2,15 +2,17 @@ from sqlalchemy.orm import Session
 from .model import Todo
 
 
-def create(db: Session, data):
+def create(db: Session, data, owner_id: int = None):
     print("Creating todo with data:", data)
-    todo = Todo(**data.dict())
+    todo_data = data.dict()
+    if owner_id is not None:
+        todo_data["owner_id"] = owner_id
+    todo = Todo(**todo_data)
     print("Created todo object:", todo)
     db.add(todo)
     db.commit()
     db.refresh(todo)
     return todo
-
 
 def get_all(db: Session):
     return db.query(Todo).all()
