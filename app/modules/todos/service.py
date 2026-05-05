@@ -1,7 +1,7 @@
 from . import repository
 
-def create_todo(db, data):
-    return repository.create(db, data)
+def create_todo(db, data, owner_id: int = None):
+    return repository.create(db, data, owner_id)
 
 
 def get_all_todos(db):

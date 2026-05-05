@@ -1,6 +1,9 @@
 from fastapi import FastAPI
+from fastapi.openapi.docs import get_swagger_ui_html
 from app.core.database import Base, engine
 from app.modules.todos.api.v1.router import router as todo_router
+from app.modules.users.api.v1.router import router as user_router
+from app.modules.auth.api.v1.router import router as auth_router
 from app.core.docs import description, tags_metadata, contact_info, license_info, servers
 import os
 import platform
@@ -59,3 +62,5 @@ def health_check():
     }
 
 app.include_router(todo_router)
+app.include_router(user_router)
+app.include_router(auth_router)
